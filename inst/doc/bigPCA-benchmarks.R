@@ -129,7 +129,7 @@ str(benchmark_results)
 #         replicate = rep,
 #         user_time = unname(timing[["user.self"]]),
 #         system_time = unname(timing[["sys.self"]]),
-#         user_time = unname(timing[["user_time"]]),
+#         elapsed = unname(timing[["elapsed"]]),
 #         success = success,
 #         backend = if (is.null(backend)) NA_character_ else as.character(backend),
 #         iterations = iterations,
@@ -152,6 +152,28 @@ str(benchmark_results)
 # }
 # 
 # save(benchmark_results, file = file.path("data", "benchmark_results.rda"), compress = "bzip2")
+
+## ----irlba-benchmark, eval=requireNamespace("bench", quietly = TRUE) && requireNamespace("irlba", quietly = TRUE)----
+set.seed(2025)
+bm <- bigmemory::big.matrix(nrow = 2500, ncol = 40, type = "double")
+m <- matrix(rnorm(2500 * 40), nrow = 2500)
+bm[,] <- m
+
+bench::mark(
+  bigpca = bigPCAcpp::pca_bigmatrix(
+    bm,
+    center = TRUE,
+    scale = TRUE,
+    ncomp = 4
+  )$dev,
+  irlba = irlba::prcomp_irlba(
+    m,
+    n = 4,
+    center = TRUE,
+    scale. = TRUE
+  )$dev,
+  min_iterations = 200
+)
 
 ## ----summary-table------------------------------------------------------------
 successful <- benchmark_results[benchmark_results$success, ]

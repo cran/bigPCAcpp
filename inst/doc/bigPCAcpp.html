@@ -436,7 +436,7 @@ variance ratios.</p>
 <span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>  <span class="at">scores =</span> max_score_error</span>
 <span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a>)</span>
 <span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a><span class="co">#&gt;     rotation         sdev       scores </span></span>
-<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a><span class="co">#&gt; 3.441691e-15 1.110223e-15 7.993606e-15</span></span></code></pre></div>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a><span class="co">#&gt; 3.247402e-15 2.914335e-15 7.993606e-15</span></span></code></pre></div>
 <p>The maximum absolute deviations between the base implementation and
 <strong>bigPCAcpp</strong> are negligible (on the order of numerical
 precision), showing that the out-of-core algorithm faithfully reproduces
@@ -554,10 +554,10 @@ file-backed matrices.</p>
 down-weighting leverage points.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>robust_pca <span class="ot">&lt;-</span> <span class="fu">pca_robust</span>(iris_mat, <span class="at">ncomp =</span> <span class="dv">4</span><span class="dt">L</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>robust_pca<span class="sc">$</span>sdev</span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; [1] 1.9153872 0.5075338 0.3074052 0.2357631</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co">#&gt; [1] 1.9647910 0.5053148 0.3058318 0.2349409</span></span>
 <span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>robust_pca<span class="sc">$</span>robust_weights[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt;  [1] 0.02469728 0.07676234 0.43335242 0.67140174 0.67743015 0.74308617</span></span>
-<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt;  [7] 0.65577512 0.74857591 0.79772190 0.68421285</span></span></code></pre></div>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co">#&gt;  [1] 0.3130404 0.2549449 0.7021058 0.7068777 0.6394573 0.5986293 0.6464197</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co">#&gt;  [8] 0.6390229 0.6953475 0.6492590</span></span></code></pre></div>
 <p>The robust PCA interface accepts regular dense matrices, computes
 robust estimates of location and scale, and returns component scores
 along with the per-row weights and iteration counts used by the
@@ -615,7 +615,7 @@ generated in batches using
 <span id="cb12-32"><a href="#cb12-32" tabindex="-1"></a>  <span class="at">center =</span> pca<span class="sc">$</span>center,</span>
 <span id="cb12-33"><a href="#cb12-33" tabindex="-1"></a>  <span class="at">scale =</span> pca<span class="sc">$</span>scale</span>
 <span id="cb12-34"><a href="#cb12-34" tabindex="-1"></a>)</span>
-<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a><span class="co">#&gt; &lt;pointer: 0x103e0b4d0&gt;</span></span></code></pre></div>
+<span id="cb12-35"><a href="#cb12-35" tabindex="-1"></a><span class="co">#&gt; &lt;pointer: 0x1267a8600&gt;</span></span></code></pre></div>
 <p>Once the scores are stored on disk, they can be sampled and plotted
 just like the in-memory workflow:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">pca_plot_scores</span>(</span>
